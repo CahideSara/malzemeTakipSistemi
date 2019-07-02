@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/admin/malzemeler/malzemeler.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="alan">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="img-rounded" style="background-color:#fff;height: 600px;">
+                        <br/>
+                        <br/>
+                        <div   class="col-md-8 ">
+
+                            <h:form id="elektronik-table" >
+                                <f:view>
+                                    <h:dataTable frame="border=3;" class="table table-striped table-bordered" style="background-color: #269abc;font-size: xx-small;" cellspacing="0" width="100%"  value="#{elektronikBEAN.ellist}" var="el">
+                                        <thead>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">ID</a></f:facet>
+                                                <h:commandLink style="color: #b92c28" action="#{elektronikBEAN.updateForm(el)}"  value="#{el.id}">
+                                                </h:commandLink>
+
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">MALZEME ADI</a></f:facet>
+                                                    #{el.malzeme_ad}  
+                                            </h:column> 
+
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">ALIŞ TARİHİ</a></f:facet>
+                                                    #{el.s_al}  
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">KİMDE</a></f:facet>
+                                                <h:column rendered="#{el.sicil_no==0}">
+                                                    <a>--- </a>
+                                                </h:column >
+
+                                                <h:column  rendered="#{el.sicil_no!=0}">
+                                                    #{el.sicil_no}
+                                                </h:column>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">ZİMMETLENDİĞİ TARİH</a></f:facet>
+                                                <h:column rendered="#{el.sicil_no==0}">
+                                                    <a>--- </a>
+                                                </h:column >
+
+                                                <h:column  rendered="#{el.sicil_no!=0}">
+                                                    #{el.s_zimmet}
+                                                </h:column>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">DURUMU</a></f:facet>
+                                                    #{el.durumu}  
+                                            </h:column>
+                                            <h:column >
+                                                <div class="btn-group">
+                                                    <h:commandLink style="font-size: xx-small;background-color: #002752;" styleClass="btn btn-default" value="DETAYI" action="#{elektronikBEAN.detay(el)}" >
+
+                                                    </h:commandLink> 
+
+                                                </div>
+
+                                            </h:column >
+                                        </thead>
+                                    </h:dataTable>
+                                    <pre style="color: darkred">  #{elektronikBEAN.page}.SAYFA  TOPLAM SAYFA: #{elektronikBEAN.pageCount} </pre>
+                                </f:view>
+                            </h:form> 
+                            <h:form>
+
+                                <div class="btn btn-group">
+                                    <h:commandLink  action="#{elektronikBEAN.geri()}"    >
+                                        <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                                        <f:ajax execute="@this" render="elektronik-table"/>
+                                    </h:commandLink>
+                                    <h:commandLink  action="#{elektronikBEAN.ileri()}"     >
+                                        <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                                        <f:ajax execute="@this" render="elektronik-table"/>
+                                    </h:commandLink>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-3 ">
+
+                            <div class="col-md-11 container "  style="font-size: x-small;background-color:#269abc;">
+
+                                <br/>
+                                <br/>
+                                <h:form style="font-size: xx-small;" id="elektronik_crud">
+                                    <div class="form-group">
+                                        <h:inputHidden value="#{elektronikBEAN.el.id}"> 
+                                        </h:inputHidden>  
+                                        <br/>
+                                        <label for="inputName"  style="width: auto;">MALZEME AD</label>
+                                        <h:inputText  value="#{elektronikBEAN.el.malzeme_ad}" styleClass="form-control"  >
+                                        </h:inputText>
+                                        <br/>
+                                        <label for="inputName"   style="width: auto">XDSL-BARKOT-NO</label>
+                                        <h:inputText  value="#{elektronikBEAN.el.xdsl_ttbarkot_no}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/>  
+                                        <label for="inputName"   style="width: auto">IM&pound; NO </label>
+                                        <h:inputText  value="#{elektronikBEAN.el.im_no}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/> 
+                                        <label for="inputName"   style="width: auto">SERİ NO </label>
+                                        <h:inputText  value="#{elektronikBEAN.el.seri_no}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/> 
+                                        <label for="inputName"   style="width: auto">JDSU BAŞLIK </label>
+                                        <h:inputText  value="#{elektronikBEAN.el.jdsu_baslik}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/> 
+                                        <label for="inputName"   style="width: auto">JDSU GÖVDE </label>
+                                        <h:inputText  value="#{elektronikBEAN.el.jdsu_gövde}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/> 
+                                        <br/> 
+                                        <label for="inputName"   style="width: auto">CUTT BARKOT NO </label>
+                                        <h:inputText  value="#{elektronikBEAN.el.cutt_barkot_no}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/> 
+                                        <br/> 
+                                        <label for="inputName"   style="width: auto">FİRMA AD </label>
+                                        <h:inputText  value="#{elektronikBEAN.el.firma_adi}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/>
+                                        <label for="inputName"   style="width: auto">UKD  TARİHİ </label>
+                                        <h:inputText  value="#{elektronikBEAN.el.ukd_tarihi}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/>
+                                        <label for="inputName"   style="width: auto"> EK ÖZELLİK-1</label>
+                                        <h:inputText  value="#{elektronikBEAN.el.ek1}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/> 
+                                        <label for="inputName"   style="width: auto"> EK ÖZELLİK-2</label>
+                                        <h:inputText  value="#{elektronikBEAN.el.ek2}" styleClass="form-control">
+                                        </h:inputText> 
+                                        <br/> 
+                                        <p:outputLabel  > ALINDIGI TARİH</p:outputLabel><br/>
+                                        <p:calendar    value="#{elektronikBEAN.el.al_tarihi}" locale="tr" />
+                                        <br/>
+                                        <br/>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="btn-group">
+                                            <h:commandButton style="font-size: x-small" action="#{elektronikBEAN.updateModal()}" value="KONTROL ET" styleClass="btn btn-success" rendered="#{elektronikBEAN.el.id!=null}">                                          
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small" action="#{elektronikBEAN.create()}" value="EKLE" styleClass="btn btn-primary" rendered="#{elektronikBEAN.el.id==null}">                                          
+                                            </h:commandButton>
+                                             <h:commandButton style="font-size: x-small" onclick="$('#modalAriza').modal('show')"    styleClass="btn btn-danger" value="ARIZALI"  rendered="#{elektronikBEAN.el.id!=null}" >
+                                                <f:ajax execute="ariza-modal" render="elektronik-crud elektronik-table"  />
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small"  onclick="$('#modalUpdate').modal('show')"   styleClass="btn btn-default" value="GÜNCELLE"  rendered="#{elektronikBEAN.el.id!=null}" >
+                                                <f:ajax execute="update-modal" render="elektronik-crud elektronik-table" />
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small" onclick="$('#modalDelete').modal('show')"    styleClass="btn btn-danger" value="SİL"  rendered="#{elektronikBEAN.el.id!=null}" >
+                                                <f:ajax execute="delete-modal" render="elektronik-crud elektronik-table"  />
+                                            </h:commandButton>
+                                           
+                                            <h:commandButton style="font-size: x-small"  action="#{elektronikBEAN.clearForm()}"   styleClass="btn btn-info" value="FORMU TEMİZLE"  rendered="#{elektronikBEAN.el.id!=null}" >
+                                            </h:commandButton>
+                                        </div>
+                                    </div>
+                                </h:form> 
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <h:form  >
+                    <div class="modal" id="modalUpdate" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <h:panelGroup layout="block" class="modal-content" id="update-modal">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">GÜNCELLEME </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div  class="modal-body table-striped">
+                                    <div>
+                                        <label for="inputName"  style="color: darkred">ID'Sİ</label>&#160;&#160;#{elektronikBEAN.el.id}&#160;&#160; <a style="color: darkred">OLAN</a> 
+                                    </div><br/>
+                                    <div class="col-md-4">
+
+                                        <label for="inputName"  style="color: darkred">MALZEME &#160;AD :</label>
+                                        <br/>                                       
+                                        <label for="inputName"  style="color: darkred" >XDSL-BARKOT-NO:</label>
+                                        <br/>
+                                        <label for="inputName"   style="color: darkred">IM&pound;&#160; NO: </label>
+                                        <br/>
+                                        <label for="inputName"  style="color: darkred">SERİ&#160; NO :</label>
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">JDSU &#160;BAŞLIK :</label>
+                                        <br/> 
+                                        <label for="inputName"   style="color: darkred">JDSU &#160;GÖVDE :</label>&#160;&#160;
+                                        <br/> 
+                                        <label for="inputName"   style="color: darkred">CUTT&#160; BARKOT&#160; NO: </label>
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">FİRMA&#160; AD :</label>&#160;&#160;
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">UKD &#160;TARİHİ:</label>&#160;&#160;
+                                        <br/>
+                                        <label for="inputName"   style="color: darkred"> EK &#160;ÖZELLİK-1:</label>&#160;&#160;
+                                        <br/> 
+                                        <label for="inputName"   style="color: darkred"> EK &#160;ÖZELLİK-2:</label>&#160;&#160;
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">ALINDIGI &#160;TARİH:</label>&#160;&#160;
+                                        <br/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        #{elektronikBEAN.el.malzeme_ad}<br/>
+                                        #{elektronikBEAN.el.xdsl_ttbarkot_no}
+                                        <br/>                                         
+                                        #{elektronikBEAN.el.im_no}
+                                        <br/> 
+                                        #{elektronikBEAN.el.seri_no}
+                                        <br/>
+                                        #{elektronikBEAN.el.jdsu_baslik}
+                                        <br/> 
+                                        #{elektronikBEAN.el.jdsu_gövde}
+                                        <br/> 
+                                        #{elektronikBEAN.el.cutt_barkot_no} 
+                                        <br/> 
+                                        #{elektronikBEAN.el.firma_adi}
+                                        <br/>
+                                        #{elektronikBEAN.el.ukd_tarihi}
+                                        <br/>
+                                        #{elektronikBEAN.el.ek1}
+                                        <br/> 
+                                        #{elektronikBEAN.el.ek2} 
+                                        <br/> 
+                                        #{elektronikBEAN.el.al_tarihi}
+                                        <br/>
+                                    </div>
+                                    <br/><br/>
+                                    <label style="color: #ac2925">OLARAK BİLGİLER GÜNCELLENECEKTİR..</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton styleClass="btn btn-danger"   value="TAMAM" action="#{elektronikBEAN.update()}" >                                                       
+                                    </h:commandButton> 
+                                    <button type="button"  class="btn bg-info" data-dismiss="modal">VAZGEÇ</button>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </h:form>
+
+                <h:form>  
+                    <div class="modal" id="modalAriza" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <h:panelGroup layout="block" class="modal-content" id="ariza-modal">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">ARIZA BİLDİSİNDE BULUN</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div  class="modal-body">
+
+                                    <label for="inputName"  >ARIZALANDIĞI  TARİH</label><br/>
+                                    <h:inputText  value="#{elektronikBEAN.az.arizat}" styleClass="form-control"  >
+                                    </h:inputText>
+                                    <br/>
+                                    <label for="inputName"  >ARIZA NEDENİ</label><br/>
+                                    <h:inputTextarea    value="#{elektronikBEAN.az.ariza_nedeni}" class="form-control" >
+                                    </h:inputTextarea>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <h:commandButton styleClass="btn btn-danger"   value="ARİZA BİLDİR"  action="#{elektronikBEAN.arizali()}"/>
+                                    <button type="button"  class="btn bg-info" data-dismiss="modal">VAZGEÇ</button>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </h:form>
+
+
+
+
+
+
+                <h:form >
+                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">SİLME İŞLEMİ </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div  class="modal-body">
+                                    <div class="col-md-4">
+                                        <label style="color: darkred">MALZEME &#160; ID:  </label>                                    
+                                        <br/>
+                                        <label for="inputName"  style="color: darkred">MALZEME &#160;AD :</label>
+                                        <br/>
+                                        <label for="inputName"  style="color: darkred" >XDSL-BARKOT-NO:</label>
+                                        <br/>  
+                                        <label for="inputName"   style="color: darkred">IM&pound;&#160; NO: </label>
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">SERİ&#160; NO :</label>
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">JDSU &#160;BAŞLIK :</label>
+                                        <br/> 
+                                        <label for="inputName"   style="color: darkred">JDSU &#160;GÖVDE :</label>
+                                        <br/> 
+                                        <label for="inputName"   style="color: darkred">CUTT &#160; BARKOT&#160; NO: </label>
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">FİRMA&#160; AD :</label>
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">UKD &#160;TARİHİ:</label>
+                                        <br/>
+                                        <label for="inputName"   style="color: darkred"> EK &#160;ÖZELLİK-1:</label>
+                                        <br/> 
+                                        <label for="inputName"   style="color: darkred"> EK &#160;ÖZELLİK-2:</label>
+                                        <br/> 
+                                        <label for="inputName"  style="color: darkred">ALINDIGI &#160;TARİH:</label>
+                                        <br/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-md-8">
+                                        #{elektronikBEAN.el.id}<br/>
+                                        #{elektronikBEAN.el.malzeme_ad}<br/>
+                                        #{elektronikBEAN.el.xdsl_ttbarkot_no}
+                                        <br/>                                         
+                                        #{elektronikBEAN.el.im_no}
+                                        <br/> 
+                                        #{elektronikBEAN.el.seri_no}
+                                        <br/>
+                                        #{elektronikBEAN.el.jdsu_baslik}
+                                        <br/> 
+                                        #{elektronikBEAN.el.jdsu_gövde}
+                                        <br/> 
+                                        #{elektronikBEAN.el.cutt_barkot_no} 
+                                        <br/> 
+                                        #{elektronikBEAN.el.firma_adi}
+                                        <br/>
+                                        #{elektronikBEAN.el.ukd_tarihi}
+                                        <br/>
+                                        #{elektronikBEAN.el.ek1}
+                                        <br/> 
+                                        #{elektronikBEAN.el.ek2} 
+                                        <br/> 
+                                        #{elektronikBEAN.el.al_tarihi}
+                                        <br/><br/>
+                                    </div>
+                                    <br/>
+                                    <label style="color: #ac2925"> BİLGİLERİNDEKİ MALZEME SİLİNECEKTİR..</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton styleClass="btn btn-danger"   value="TAMAM" action="#{elektronikBEAN.delete()}" >                                                       
+                                    </h:commandButton> 
+                                    <button type="button"  class="btn bg-info" data-dismiss="modal">VAZGEÇ</button>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </h:form>
+
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

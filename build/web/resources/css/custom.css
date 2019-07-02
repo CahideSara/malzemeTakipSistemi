@@ -1,0 +1,41 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20.Nis.2015, 12:03:56
+    Author     : Ailem
+*/
+
+.arkaplan{
+   background: #002752
+       
+    
+}
+.arka{
+  background-image:url(../resources/images/tele.jpg);
+       
+    
+}
+
+.Bimage{
+    background-image:url(../resources/images/arkaplan.jpg); 
+    background-attachment:fixed;
+}
+.TopImage{
+    background-image:url(../resources/images/top.jpg);
+}
+.GImage{
+    background-image:url(../resources/images/gecebulut.jpg);
+    background-attachment:fixed;
+}
+hr{
+    color: black;
+    size: 5;
+    width: 85%;
+}
+.boyut{
+    color:red;
+    width: 80px;
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/amir/malzemeler/malzemeler.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="alan">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="img-rounded" style="background-color:#fff;height: 600px;">
+                        <br/>
+                        <br/>
+                        <h:form  id="sarf-table">
+                            <f:view>
+                                <h:dataTable frame="border=3;" class="table table-striped table-bordered" style="background-color: #269abc;font-size: x-small;" cellspacing="0" width="100%"  value="#{sarfBEAN.smlist}" var="sarf">
+                                    <thead>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">MALZEME ID</a></f:facet>
+                                            #{sarf.id}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">MALZEME ADI</a></f:facet>
+                                                #{sarf.malzeme_ad}  
+                                        </h:column> 
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">EBATI</a></f:facet>
+                                                #{sarf.ebat}  
+                                        </h:column>                                           
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">FİRMA ADI</a></f:facet>
+                                            <h:column rendered="#{sarf.firma_ad==null}">
+                                                <a>--- </a>
+                                            </h:column >
+
+                                            <h:column  rendered="#{sarf.firma_ad!=null}">
+                                                #{sarf.firma_ad}
+                                            </h:column>
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">EK ÖZELLİKLER</a></f:facet>
+                                            <h:column rendered="#{sarf.ek_1==null}">
+                                                <a>--- </a>
+                                            </h:column >
+
+                                            <h:column  rendered="#{sarf.ek_1!=null}">
+                                                #{sarf.ek_1}
+                                            </h:column>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">ALIŞ TARİHİ</a></f:facet>
+                                                #{sarf.s_al}  
+                                        </h:column> 
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">MALZEME KİMDE</a></f:facet>
+                                            <h:column rendered="#{sarf.sicil_no==0}">
+                                                <a>--- </a>
+                                            </h:column >
+
+                                            <h:column  rendered="#{sarf.sicil_no!=0}">
+                                                #{sarf.sicil_no}
+                                            </h:column>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">ZİMMETLENDİĞİ TARİH</a></f:facet>
+                                            <h:column rendered="#{sarf.sicil_no==0}">
+                                                <a>--- </a>
+                                            </h:column >
+
+                                            <h:column  rendered="#{sarf.sicil_no!=0}">
+                                                #{sarf.s_zimmet}
+                                            </h:column>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color:white">DURUMU</a></f:facet>
+                                                #{sarf.durumu}  
+                                        </h:column>
+                                    </thead>
+                                </h:dataTable>
+                                <pre style="color: darkred">  #{sarfBEAN.page}.SAYFA  TOPLAM SAYFA: #{sarfBEAN.pageCount} </pre>
+                            </f:view>
+                        </h:form> 
+                        <h:form>
+
+                            <div class="btn btn-group">
+                                <h:commandLink  action="#{sarfBEAN.geri()}"    >
+                                    <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                                    <f:ajax execute="@this" render="sarf-table"/>
+                                </h:commandLink>
+                                <h:commandLink  action="#{sarfBEAN.ileri()}"     >
+                                    <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                                    <f:ajax execute="@this" render="sarf-table"/>
+                                </h:commandLink>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+
+

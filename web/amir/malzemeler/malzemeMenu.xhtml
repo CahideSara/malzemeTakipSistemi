@@ -1,0 +1,39 @@
+<ui:composition  
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+
+    <div  class="btn btn-group" style="height:40px; ">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <a href="malzemeMenu.xhtml"></a>
+        <h:form>
+
+            <h:commandButton class="btn btn-toolbar" style=" font-size: x-small; height: 35px; position: relative;right:-20px;  color:white;background-color:#002752;  " value="SARF MALZEMELER" action="/amir/malzemeler/sarf_malzeme.xhtml"/>
+            <h:commandButton class="btn btn-toolbar" style=" font-size: x-small; height: 35px; position: relative;right:-25px;  color:white;background-color:#002752;  " value="DEPODAKİ SARF MALZEMELER" action="/amir/malzemeler/sarfdepo.xhtml"/>
+            <h:commandButton class="btn btn-toolbar" style="font-size: x-small; height: 35px;position: relative;right:-30px; background: #002752;color: white;" value="ELEKTRONİK MALZEMELER" action="/amir/malzemeler/elektronik.xhtml"/>
+            <h:commandButton class="btn btn-toolbar" style="font-size: x-small; height: 35px;position: relative;right:-35px; background: #002752;color: white;" value="DEPODAKİ ELEKTRONİK MALZEMELER" action="/amir/malzemeler/elektronikdepo.xhtml"/>
+            <h:commandButton class="btn btn-toolbar" style="font-size: x-small; height: 35px;position: relative;right:-40px; background: #002752 ;color:white" value="KİŞİ TALEPLERİ    (#{userBEAN.tlpDAO.countamirtlp(userBEAN.r)})" action="/amir/malzemeler/talepler.xhtml"/>
+            <h:commandButton class="btn btn-toolbar" style="font-size: x-small; height: 35px;position: relative;right:-45px; background: #002752 ;color: white" value="ARIZA KAYITLARI  (#{arizaDeposuBEAN.arizadDAO.amircount()}) " action="/amir/malzemeler/arizalar.xhtml"/>
+            
+        </h:form>
+
+    </div>
+    <br/>
+
+
+
+
+</ui:composition> 

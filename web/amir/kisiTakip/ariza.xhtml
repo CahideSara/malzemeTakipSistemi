@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/amir/kisiTakip/kisi.xhtml">
+    <ui:define name="takip">
+        <div class="container" style="background-color:#28a4c9;height:600px;">
+
+            <h:form  id="ariza-table">
+                <br/><br/>
+                <h:dataTable  class="table table-striped table-bordered" style="background-color:dimgray;font-size: x-small;" cellspacing="0" width="100%"  value="#{kisiBEAN.alist}" var="ariza">
+                    <thead>
+                        <h:column>
+                            <f:facet  name="header"><a style="color:white">ARIZA ID</a></f:facet>
+                                #{ariza.id}  
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><a style="color:white">MALZEME ADI</a></f:facet>
+                                #{ariza.malzeme_ad}  
+                        </h:column>
+                        <h:column>
+                            <f:facet  name="header"><a style="color:white">MALZEME TÜRÜ</a></f:facet>
+                                #{ariza.tur}  
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><a style="color:white">ARIZA NEDENİ</a></f:facet>
+                                #{ariza.ariza_nedeni}  
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><a style="color:white">ARIZA TARİHİ</a></f:facet>
+                                #{ariza.arizat}  
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><a style="color:white">DURUMU</a></f:facet>
+                                #{ariza.durumu}  
+                        </h:column>
+
+                    </thead>
+                </h:dataTable>
+                <pre style="color: darkred;background-color: #28a4c9">  #{kisiBEAN.pagea}.SAYFA  TOPLAM SAYFA: #{kisiBEAN.pageCounta} </pre>
+
+            </h:form> 
+            <h:form>
+
+                <div class="btn btn-group">
+
+
+                    <h:commandLink  action="#{kisiBEAN.geria()}"    >
+                        <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                        <f:ajax execute="@this" render="ariza-table"/>
+                    </h:commandLink>
+                    <h:commandLink  action="#{kisiBEAN.ileria()}"     >
+                        <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                        <f:ajax execute="@this" render="ariza-table"/>
+                    </h:commandLink>
+                </div>
+            </h:form>
+
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+

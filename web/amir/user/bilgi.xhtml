@@ -1,0 +1,103 @@
+<ui:composition  
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
+    <div class="container" style="background-color:#28a4c9;">
+        <div  style="background-color:#28a4c9;height:260px;">
+            <h:form>
+                <div class="col-md-3">
+                    <br/>
+                    <h:graphicImage url="/resources/images/kul.png" style="height: 200px;width: 200px;"></h:graphicImage><br/>
+                </div>
+                <div class="col-md-5">
+                    <br/>
+                    <h:form  >
+                        <font style="font-size: medium"> 
+                            <label for="inputName" style="width: 120px; height: 25px; color: #002752;">SİCİL&#160; NO: </label>#{userBEAN.k.sicil_no}  <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">AD :</label>#{userBEAN.k.ad} <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">SOYAD:</label>#{userBEAN.k.soyad}<br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">TELEFON:</label>#{userBEAN.k.telefon} <br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">SAHA &#160;EKİBİ:</label>#{userBEAN.k.ekibi} <br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">E-MAİL:    </label>#{userBEAN.k.mail}  <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">MESLEĞİ:  </label>#{userBEAN.k.görevi}  <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">KONUMU:       </label>#{userBEAN.k.konumu}  <br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">TT/FİRMA:  </label>#{userBEAN.k.tt_firma}  <br/>
+                        </font>
+                    </h:form>
+                </div>
+
+                <div class="col-md-4">
+
+                </div>
+
+            </h:form>
+        </div>
+        <div  class="btn btn-group-vertical" style="height:40px;  ">
+            <h:form >
+                <h:commandButton class="btn btn-toolbar" style=" height: 30px;color: #cedc00;background-color:#002752;  " value="SARF MALZEMELERİM" action="/amir/user/sarf.xhtml"/>&#160;
+                <h:commandButton class="btn btn-toolbar" style="height: 30px; background: #002752;color: #cedc00;" value="ELEKTRONİK MALZEMELERİM" action="/amir/user/elektronik.xhtml"/>&#160;
+                <h:commandButton class="btn btn-toolbar" style="height: 30px;background: #002752 ;color: #cedc00;" value="ARIZA DEPOM" action="/amir/user/ariza.xhtml"/>&#160;
+                <h:commandButton class="btn btn-toolbar" style="height: 30px;background: #002752 ;color: #cedc00;" value="MALZEME TALEPLERİM" action="/amir/user/talep.xhtml"/>&#160;
+                <h:commandLink onclick="$('#modalSifre').modal('show')"  class="btn btn-toolbar"  ><u style=" height: 30px;color:#cedc00;  ">KULLANICI BİLGİLERİNİ DEGİŞTİR</u>
+                    <f:ajax execute="update-modal"   />
+                </h:commandLink>&#160;
+            </h:form>
+        </div>
+        <br/>
+    </div>
+    <h:form  >
+        <div class="modal" id="modalSifre" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <h:panelGroup layout="block" class="modal-content" id="update-modal">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">KULLANICI BİLGİLERİNİ GÜNCELLEME</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"> 
+                            </span>
+                        </button>
+                    </div>
+                    <div  class="modal-body">
+                        <label style="color: darkred">SİCİL&#160;NO&#160;<a style="color: #002752">" #{userBEAN.k.sicil_no} "</a>&#160;OLAN &#160;KİŞİNİN </label>  
+                        <br/>     <br/>
+
+                        <label style="width: 150px; color: darkred">KULLANICI  &#160; ADI :</label>
+                        <h:inputText  value="#{userBEAN.r.kullanici_adi}"/><br/><br/>
+                        <label style="width: 150px; color: darkred">ŞİFRE : </label>
+                        <h:inputText  value="#{userBEAN.r.sifre}"/><br/>
+                        <br/>
+
+                        <label style="width: 150px; color: darkred">SORU : </label>
+                        <h:selectOneMenu  value="#{userBEAN.r.soru}" class="form-group" style="height: 30px; width: 250px; ">
+                            <f:selectItem  itemValue="EN SEVDİĞİN RENK ?" itemLabel="EN SEVDİĞİN RENK ?"/>
+                            <f:selectItem  itemValue="ISSIZ ADAYA DÜŞSEN YANINA NE ALIRDIN ?" itemLabel="ISSIZ ADAYA DÜŞSEN YANINA NE ALIRDIN ?"/>
+                            <f:selectItem  itemValue="UĞURLU SAYIN NEDİR?" itemLabel="UĞURLU SAYIN NEDİR?"/>
+                            <f:selectItem  itemValue="EN SEVDİĞİN KİTAP YAZARI KİMDİR ?" itemLabel="EN SEVDİĞİN KİTAP YAZARI KİMDİR ?"/>
+                            <f:selectItem  itemValue="HANGİ DÖNEMDE YAŞAMAK İSTERDİN ?" itemLabel="HANGİ DÖNEMDE YAŞAMAK İSTERDİN ?"/>
+                            <f:selectItem  itemValue="ÖRNEK ALDIĞIN KİŞİ KİMDİR ?" itemLabel="ÖRNEK ALDIĞIN KİŞİ KİMDİR ?"/>
+
+                        </h:selectOneMenu>
+                        <br/>
+                        <br/>
+
+                        <label style="width: 150px; color: darkred">CEVAP : </label>
+                        <h:inputText id="cevap" value="#{userBEAN.r.cevap}" validatorMessage="BOŞ GEÇİLEMEZ !!">
+                            <f:validateLength  minimum="2"/>
+                        </h:inputText>
+                        <h:message for="cevap" style="color: red" />
+                        <br/>
+                        <br/>
+                        <label style="color: #ac2925">OLARAK DEĞİŞTİRİLECEKTİR..</label>
+                    </div>
+                    <div class="modal-footer">
+                        <h:commandButton styleClass="btn btn-danger"   value="TAMAM" action="#{userBEAN.sifreDegistir()}" >                                                       
+                        </h:commandButton> 
+                        <button type="button"  class="btn bg-info" data-dismiss="modal">VAZGEÇ</button>
+                    </div>
+                </h:panelGroup>
+            </div>
+        </div>
+    </h:form>
+
+</ui:composition> 

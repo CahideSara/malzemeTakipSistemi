@@ -1,0 +1,63 @@
+<ui:composition  
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
+    <div class="container" style="background-color:#28a4c9;">
+
+        <div  style="background-color:#28a4c9;height:260px;">
+            <h:form>
+
+                <div class="col-md-3">
+                    <br/>
+                    <h:graphicImage url="/resources/images/kul.png" style="height: 200px;width: 200px;"></h:graphicImage><br/>
+
+                </div>
+                <div class="col-md-5">
+                    <br/>
+                    <h:form  >
+
+                        <font style="font-size: medium"> 
+                            <label for="inputName" style="width: 120px; height: 25px; color: #002752;">SİCİL&#160; NO: </label>#{kisiBEAN.k.sicil_no}  <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">AD :</label>#{kisiBEAN.k.ad} <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">SOYAD:</label>#{kisiBEAN.k.soyad}<br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">TELEFON:</label>#{kisiBEAN.k.telefon} <br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">SAHA &#160;EKİBİ:</label>#{kisiBEAN.k.ekibi} <br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">E-MAİL:    </label>#{kisiBEAN.k.mail}  <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">MESLEĞİ:  </label>#{kisiBEAN.k.görevi}  <br/>
+                            <label for="inputName" style="width: 120px;height: 25px; color: #002752;">KONUMU:       </label>#{kisiBEAN.k.konumu}  <br/>
+                            <label for="inputName" style="width: 120px; height: 25px;color: #002752;">TT/FİRMA:  </label>#{kisiBEAN.k.tt_firma}  <br/>
+
+                        </font>
+
+                    </h:form>
+
+
+                </div>
+
+                <div class="col-md-4">
+
+                </div>
+
+            </h:form>
+        </div>
+
+
+        <div  class="btn btn-group-vertical" style="height:40px;  ">
+            <h:form >
+                <h:commandButton class="btn btn-toolbar" style=" height: 30px;color: #cedc00;background-color:#002752;  " value="SARF MALZEMELERİ" action="/amir/kisiTakip/sarf.xhtml"/>&#160;
+                <h:commandButton class="btn btn-toolbar" style="height: 30px; background: #002752;color: #cedc00;" value="ELEKTRONİK MALZEMELERİ" action="/amir/kisiTakip/elektronik.xhtml"/>&#160;
+                <h:commandButton class="btn btn-toolbar" style="height: 30px;background: #002752 ;color: #cedc00;" value="ARIZA DEPOSU" action="/amir/kisiTakip/ariza.xhtml"/>&#160;
+                <h:commandButton class="btn btn-toolbar" style="height: 30px;background: #002752 ;color: #cedc00;" value="MALZEME TALEPLERİ" action="/amir/kisiTakip/talep.xhtml"/>&#160;
+                &#160;
+
+            </h:form>
+
+        </div>
+        <br/>
+
+
+    </div>
+
+
+</ui:composition> 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/admin/kisiTakip/kisi.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="takip">
+        <div class="container" style="background-color:#28a4c9;height: 600px;">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+            <h:form id="sarf-table" >
+                    <br/><br/>
+                               <label style="width: 200px;color: white;">MALZEME ID:</label>
+                    #{kisiBEAN.e.id}  <br/><br/>
+                <label  style="width: 200px;color:white;">MALZEME ADI:</label>
+                    #{kisiBEAN.e.malzeme_ad}  <br/><br/>
+                <label  style="width: 200px;color:white;">XDSL-BARKOD-NO:</label>
+                    #{kisiBEAN.e.xdsl_ttbarkot_no}<br/><br/>
+                <label  style="width: 200px;color:white;"> IM&pound; NO:</label>
+                    #{kisiBEAN.e.im_no}<br/><br/>
+                <label style="width: 200px;color:white;">SERİ NO :</label>
+                    #{kisiBEAN.e.seri_no}<br/><br/>
+                <label  style="width: 200px;color:white;">JDSU BAŞLIK :</label>
+                    #{kisiBEAN.e.jdsu_baslik}<br/><br/>
+                <label  style="width: 200px;color:white;">JDSU GÖVDE :</label>
+                    #{kisiBEAN.e.jdsu_gövde}<br/><br/>
+                <label  style="width: 200px;color:white;">CUTT BARKOT NO :</label>
+                    #{kisiBEAN.e.cutt_barkot_no}<br/><br/>
+                <label  style="width: 200px;color:white;">FİRMA AD:</label>
+                    #{kisiBEAN.e.firma_adi}<br/><br/>
+                <label style="width: 200px;color:white;">UKD TARİHİ:</label>
+                    #{kisiBEAN.e.ukd_tarihi}<br/><br/>
+                <label  style="width: 200px;color:white;">EK ÖZELLİK-1:</label>
+                    #{kisiBEAN.e.ek1}<br/><br/>
+                <label  style="width: 200px;color:white;">EK ÖZELLİK-2:</label>
+                    #{kisiBEAN.e.ek2}<br/><br/>
+                <label  style="width: 200px;color:white;">ALIŞ TARİHİ:</label>
+                    #{kisiBEAN.e.s_al}  <br/><br/>
+                <label  style="width: 200px;color:white;">ZİMMETLENDİĞİ TARİH:</label>
+                    #{kisiBEAN.e.s_zimmet}<br/><br/>
+                <label style="width: 200px;color:white;">DURUMU:</label>
+                    #{kisiBEAN.e.durumu}  <br/><br/>
+
+
+            </h:form> 
+       
+                </div>
+        </div>
+    </ui:define>
+</ui:composition>
+
+

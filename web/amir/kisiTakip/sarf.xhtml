@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/amir/kisiTakip/kisi.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="takip">
+
+
+        <div class="container" style="background-color:#28a4c9;height: 600px;">
+
+            <br/>  <br/>
+
+            <div class="col-md-7" >
+                <h:form id="sarf-table" >
+
+
+
+                    <h:dataTable  class="table table-striped table-bordered" style="background-color:dimgray;font-size:x-small;" cellspacing="0" width="100%"  value="#{kisiBEAN.kmlist}"  var="sarf">
+                        <thead>
+
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">MALZEME ID</a></f:facet>
+                                    #{sarf.id}  
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">MALZEME ADI</a></f:facet>
+                                    #{sarf.malzeme_ad}  
+                            </h:column> 
+                            <h:column>
+                                <f:facet  name="header"><a style="color:white">EBATI</a></f:facet>
+                                    #{sarf.ebat}  
+                            </h:column>                                           
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">FİRMA ADI</a></f:facet>
+                                <h:column rendered="#{sarf.firma_ad==null}">
+                                    <a>--- </a>
+                                </h:column >
+
+                                <h:column  rendered="#{sarf.firma_ad!=null}">
+                                    #{sarf.firma_ad}
+                                </h:column>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet  name="header"><a style="color:white">EK ÖZELLİKLER</a></f:facet>
+                                <h:column rendered="#{sarf.ek_1==null}">
+                                    <a>--- </a>
+                                </h:column >
+
+                                <h:column  rendered="#{sarf.ek_1!=null}">
+                                    #{sarf.ek_1}
+                                </h:column>
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">ALIŞ TARİHİ</a></f:facet>
+                                    #{sarf.s_al}  
+                            </h:column> 
+
+                            <h:column>
+                                <f:facet  name="header"><a style="color:white">ZİMMETLENDİĞİ TARİH</a></f:facet>
+                                <h:column rendered="#{sarf.sicil_no==0}">
+                                    <a>--- </a>
+                                </h:column >
+
+                                <h:column  rendered="#{sarf.sicil_no!=0}">
+                                    #{sarf.s_zimmet}
+                                </h:column>
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">DURUMU</a></f:facet>
+                                    #{sarf.durumu}  
+                            </h:column>
+                            <h:column >
+                                <div class="btn-group">
+                                    <h:commandButton style="background-color:#002752;color:white;font-size: x-small" styleClass="btn " value="ZİMMETİNDEN ÇIKAR" action="#{kisiBEAN.sarfCikar(sarf)}" >
+
+                                    </h:commandButton> 
+
+                                </div>
+
+                            </h:column >
+
+                        </thead>
+                    </h:dataTable>
+                    <pre style="color: darkred;background-color: #28a4c9" >  #{kisiBEAN.pagek}.SAYFA  TOPLAM SAYFA: #{kisiBEAN.pageCountk} </pre>
+
+
+
+
+                </h:form> 
+
+                <h:form>
+
+                    <div class="btn btn-group">
+
+
+                        <h:commandLink  action="#{kisiBEAN.gerik()}"    >
+                            <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                            <f:ajax execute="@this" render="sarf-table"/>
+                        </h:commandLink>
+                        <h:commandLink  action="#{kisiBEAN.ilerik()}"     >
+                            <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                            <f:ajax execute="@this" render="sarf-table"/>
+                        </h:commandLink>
+                    </div>
+                </h:form>
+            </div>
+            <div class="col-md-1" >
+            </div>
+
+            <div class="col-md-4" style="background-color:dimgray;font-size: x-small">
+                <br/>
+
+                <h:form  >
+
+                    <div  class="form-group">
+
+                        <label for="inputName" >MALZEME ADI</label><br/><br/>
+                        <h:selectOneMenu styleClass="custom-select" id="selectMalzeme" value="#{kisiBEAN.tur}">
+                            <f:selectItems value="#{kisiBEAN.turlist}" var="turu"  itemValue="#{turu.malzeme_ad}" itemLabel="#{turu.malzeme_ad}"  />
+
+                        </h:selectOneMenu>
+                        <br/><br/>
+
+                        <label for="inputName" >MALZEME ID</label><br/><br/>
+                        <h:inputText styleClass="form-control" value="#{kisiBEAN.sm.id}"/>
+                        <br/>
+                        <br/>
+                        <p:outputLabel  >ZİMMETLENDİĞİ TARİH</p:outputLabel><br/>
+                        <p:calendar    value="#{kisiBEAN.sm.zimmet_tarihi}" locale="tr" />
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group" style="font-size: x-small">
+                            <h:commandButton style="background-color:#002752;font-size:x-small;" styleClass="btn btn-primary" value="ZİMMETİNE EKLE" action="#{kisiBEAN.sarfEkle()}" >
+
+                            </h:commandButton> 
+
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/amir/user/kisi.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="takip">
+        <div class="container" style="background-color:#28a4c9;height:600px;">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+            <h:form id="sarf-table" >
+                    <br/><br/>
+                <label style="width: 200px;color: white;">MALZEME ID:</label>
+                    #{userBEAN.e.id}  <br/><br/>
+                <label  style="width: 200px;color:white;">MALZEME ADI:</label>
+                    #{userBEAN.e.malzeme_ad}  <br/><br/>
+                <label  style="width: 200px;color:white;">XDSL-BARKOD-NO:</label>
+                    #{userBEAN.e.xdsl_ttbarkot_no}<br/><br/>
+                <label  style="width: 200px;color:white;"> IM&pound; NO:</label>
+                    #{userBEAN.e.im_no}<br/><br/>
+                <label style="width: 200px;color:white;">SERİ NO :</label>
+                    #{userBEAN.e.seri_no}<br/><br/>
+                <label  style="width: 200px;color:white;">JDSU BAŞLIK :</label>
+                    #{userBEAN.e.jdsu_baslik}<br/><br/>
+                <label  style="width: 200px;color:white;">JDSU GÖVDE :</label>
+                    #{userBEAN.e.jdsu_gövde}<br/><br/>
+                <label  style="width: 200px;color:white;">CUTT BARKOT NO :</label>
+                    #{userBEAN.e.cutt_barkot_no}<br/><br/>
+                <label  style="width: 200px;color:white;">FİRMA AD:</label>
+                    #{userBEAN.e.firma_adi}<br/><br/>
+                <label style="width: 200px;color:white;">UKD TARİHİ:</label>
+                    #{userBEAN.e.ukd_tarihi}<br/><br/>
+                <label  style="width: 200px;color:white;">EK ÖZELLİK-1:</label>
+                    #{userBEAN.e.ek1}<br/><br/>
+                <label  style="width: 200px;color:white;">EK ÖZELLİK-2:</label>
+                    #{userBEAN.e.ek2}<br/><br/>
+                <label  style="width: 200px;color:white;">ALIŞ TARİHİ:</label>
+                    #{userBEAN.e.s_al}  <br/><br/>
+                <label  style="width: 200px;color:white;">ZİMMETLENDİĞİ TARİH:</label>
+                    #{userBEAN.e.s_zimmet}<br/><br/>
+                <label style="width: 200px;color:white;">DURUMU:</label>
+                    #{userBEAN.e.durumu}  <br/><br/>
+
+            </h:form> 
+       
+                </div>
+        </div>
+    </ui:define>
+</ui:composition>
+
+

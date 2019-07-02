@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/admin/kisiTakip/kisi.xhtml" >
+    <ui:define name="takip">
+        <div class="container" style="background-color:#28a4c9;height:600px;">
+            <h:form  id="talep-table">
+                <br/><br/>
+                <h:dataTable  class="table table-striped table-bordered" style="background-color:dimgray;font-size: x-small;" cellspacing="0" width="100%"  value="#{kisiBEAN.tlplist}" var="talep">
+                    <thead>
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">TALEP ID</a></f:facet>
+                                #{talep.id}  
+                        </h:column>
+
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">MALZEMENİN TÜRÜ</a></f:facet>
+                                #{talep.tur}  
+                        </h:column> 
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">MALZEMENİN ADI</a></f:facet>
+                                #{talep.malzeme_ad}  
+                        </h:column> 
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">TALEP TARİHİ</a></f:facet>
+                                #{talep.s_talep}  
+                        </h:column> 
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">AÇIKLAMA</a></f:facet>
+                                #{talep.aciklama}  
+                        </h:column> 
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">DURUMU</a></f:facet>
+                                #{talep.durumu}  
+                        </h:column> 
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">İŞLEM YAPAN</a></f:facet>
+                            <h:column rendered="#{talep.islem_y==null}">
+                                <a>--- </a>
+                            </h:column >
+
+                            <h:column  rendered="#{talep.islem_y!=null}">
+                                #{talep.islem_y}
+                            </h:column>
+                        </h:column>
+                        <h:column>
+                            <f:facet  name="header"><a style="color: white">İŞLEM TARİHİ</a></f:facet>
+                            <h:column rendered="#{talep.islem_t==null}">
+                                <a>--- </a>
+                            </h:column >
+
+                            <h:column  rendered="#{talep.islem_t!=null}">
+                                #{talep.s_islem}
+                            </h:column>
+                        </h:column>
+                           <h:column>
+                            <f:facet  name="header"><a style="color: white">İŞLEM YAPANIN AÇIKLAMASI</a></f:facet>
+                            <h:column rendered="#{talep.islem_y==null}">
+                                <a>--- </a>
+                            </h:column >
+
+                            <h:column  rendered="#{talep.islem_y!=null}">
+                                #{talep.islem_aciklama}
+                            </h:column>
+                        </h:column>
+                          
+
+
+                    </thead>
+                </h:dataTable>
+                <pre style="color: darkred;background-color: #28a4c9">  #{kisiBEAN.paget}.SAYFA  TOPLAM SAYFA: #{kisiBEAN.pageCountt} </pre>
+
+
+
+            </h:form>
+            <h:form>
+
+                <div class="btn btn-group">
+                    <h:commandLink  action="#{kisiBEAN.gerit()}"    >
+                        <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                        <f:ajax execute="@this" render="talep-table"/>
+                    </h:commandLink>
+                    <h:commandLink  action="#{kisiBEAN.ilerit()}"     >
+                        <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                        <f:ajax execute="@this" render="talep-table"/>
+                    </h:commandLink>
+                </div>
+            </h:form>
+
+
+        </div>
+    </ui:define>
+</ui:composition>
+
+

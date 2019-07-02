@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/admin/kisiTakip/kisi.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="takip">
+        <div class="container" style="background-color:#28a4c9;height: 600px;">
+            <br/>  <br/>
+            <div class="col-md-7" >
+                <h:form id="sarf-table" >
+                    <h:dataTable  class="table table-striped table-bordered" style="background-color:dimgray;font-size: xx-small" cellspacing="0" width="100%"  value="#{kisiBEAN.ellist}"  var="el">
+                        <thead>
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">MALZEME ID</a></f:facet>
+                                    #{el.id}  
+                            </h:column>
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">MALZEME ADI</a></f:facet>
+                                    #{el.malzeme_ad}  
+                            </h:column> 
+            
+                           
+                         <h:column>
+                                <f:facet  name="header"><a style="color: white">ALIŞ TARİHİ</a></f:facet>
+                                    #{el.s_al}  
+                            </h:column>
+                           <h:column>
+                                <f:facet  name="header"><a style="color: white">ZİMMETLENDİĞİ TARİH</a></f:facet>
+                                <h:column rendered="#{el.sicil_no==0}">
+                                    <a>--- </a>
+                                </h:column >
+
+                                <h:column  rendered="#{el.sicil_no!=0}">
+                                    #{el.s_zimmet}
+                                </h:column>
+                            </h:column>
+
+
+                            <h:column>
+                                <f:facet  name="header"><a style="color: white">DURUMU</a></f:facet>
+                                    #{el.durumu}  
+                            </h:column>
+                                <h:column >
+                                <div class="btn-group">
+                                    <h:commandLink style="font-size: xx-small;background-color: #002752;" styleClass="btn btn-default" value="DETAYI" action="#{kisiBEAN.detayk(el)}" >
+
+                                    </h:commandLink> 
+
+                                </div>
+
+                            </h:column >
+
+                            <h:column >
+                                <div class="btn-group">
+                                    <h:commandButton style="font-size: xx-small;background-color: #002752;" styleClass="btn btn-default" value="ZİMMETİNDEN ÇIKAR" action="#{kisiBEAN.elektronikCikar(el)}" >
+
+                                    </h:commandButton> 
+
+                                </div>
+
+                            </h:column >
+
+                        </thead>
+                    </h:dataTable>
+                    <pre style="color: darkred;background-color: #28a4c9" >  #{kisiBEAN.pagee}.SAYFA  TOPLAM SAYFA: #{kisiBEAN.pageCounte} </pre>
+
+
+
+
+                </h:form> 
+
+                <h:form>
+
+                    <div class="btn btn-group">
+
+
+                        <h:commandLink  action="#{kisiBEAN.gerie()}"    >
+                            <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                            <f:ajax execute="@this" render="sarf-table"/>
+                        </h:commandLink>
+                        <h:commandLink  action="#{kisiBEAN.ilerie()}"     >
+                            <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                            <f:ajax execute="@this" render="sarf-table"/>
+                        </h:commandLink>
+                    </div>
+                </h:form>
+            </div>
+            <div class="col-md-1" >
+            </div>
+
+            <div class="col-md-4" style="background-color:dimgray ;">
+                <br/>
+
+                <h:form  style="font-size: x-small;">
+
+                    <div  class="form-group" >
+
+
+                        <label for="inputName" >MALZEME ID</label><br/><br/>
+                        <h:inputText styleClass="form-control" value="#{kisiBEAN.e.id}"/>
+                        <br/>
+                        <br/>
+                           <p:outputLabel  >ZİMMETLENDİĞİ TARİH</p:outputLabel><br/>
+                           <p:calendar    value="#{kisiBEAN.e.zimmet_tarihi}" locale="tr" />
+                        <br/>
+                        <br/>
+
+
+
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group" style="font-size: small">
+                            <h:commandButton style="background-color:#002752;font-size:x-small;" styleClass="btn btn-primary" value="ZİMMETİNE EKLE" action="#{kisiBEAN.elektronikEkle()}" >
+
+                            </h:commandButton> 
+
+                        </div>
+                    </div>
+
+
+
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+

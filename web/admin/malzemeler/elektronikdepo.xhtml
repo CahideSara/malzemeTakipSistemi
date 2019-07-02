@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/admin/malzemeler/malzemeler.xhtml">
+    <ui:define name="alan">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="img-rounded" style="background-color:#fff;height: 600px">
+                        <br/>
+                        <br/>
+                        <div   class="col-md-6 ">
+
+                            <h:form  id="sarf-table">
+                                <f:view>
+                                    <h:dataTable   class="table table-striped table-bordered" style="font-size: x-small; background-color: #269abc" cellspacing="0" width="100%"  value="#{elektronikBEAN.dellist}" var="del">
+                                        <thead>
+
+                                           <h:column>
+                                                <f:facet  name="header"><a style="color: white">MALZEME ID</a></f:facet>
+                                                <h:commandLink style="color: #b92c28" action="#{elektronikBEAN.updateForm(del)}"  value="#{del.id}">
+                                                </h:commandLink>
+
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">MALZEME ADI</a></f:facet>
+                                                    #{del.malzeme_ad}  
+                                            </h:column> 
+                                            >
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">ALIŞ TARİHİ</a></f:facet>
+                                                    #{del.s_al}  
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color: white">DURUMU</a></f:facet>
+                                                    #{del.durumu}  
+                                            </h:column>
+
+
+
+
+                                        </thead>
+                                    </h:dataTable>
+                                    <pre style="color: darkred">  #{elektronikBEAN.paged}.SAYFA  TOPLAM SAYFA: #{elektronikBEAN.pageCountd} </pre>
+                                </f:view>
+
+
+                            </h:form> 
+                            <h:form>
+
+                                <div class="btn btn-group">
+
+
+                                    <h:commandLink  action="#{elektronikBEAN.gerid()}"    >
+                                        <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                                        <f:ajax execute="@this" render="sarf-table"/>
+                                    </h:commandLink>
+                                    <h:commandLink  action="#{elektronikBEAN.ilerid()}"     >
+                                        <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                                        <f:ajax execute="@this" render="sarf-table"/>
+                                    </h:commandLink>
+                                </div>
+                            </h:form>
+
+                        </div>
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-5 ">
+
+                            <div class="col-md-11 container "  style="font-size: small;background-color:#269abc;">
+                                <br/>
+                                <br/>
+                                <h:form style="font-size: small;" id="elektronik_detay">
+                                    <br/>
+                                    <br/>
+                                    <label style="width: 150px;color: white;">MALZEME ID:</label>
+                                    #{elektronikBEAN.el.id}  <br/><br/>
+                                    <label  style="width: 150px;color: white;">MALZEME ADI:</label>
+                                    #{elektronikBEAN.el.malzeme_ad}  <br/><br/>
+                                    <label  style="width: 150px;color :white;">XDSL-BARKOD-NO:</label>
+                                    #{elektronikBEAN.el.xdsl_ttbarkot_no}<br/><br/>
+                                    <label  style="width: 150px;color:white;"> IM&pound; NO:</label>
+                                    #{elektronikBEAN.el.im_no}<br/><br/>
+                                    <label style="width: 150px;color:white;">SERİ NO :</label>
+                                    #{elektronikBEAN.el.seri_no}<br/><br/>
+                                    <label  style="width: 150px;color:white;">JDSU BAŞLIK :</label>
+                                    #{elektronikBEAN.el.jdsu_baslik}<br/><br/>
+                                    <label  style="width: 150px;color: white;">JDSU GÖVDE :</label>
+                                    #{elektronikBEAN.el.jdsu_gövde}<br/><br/>
+                                    <label  style="width: 150px;color: white;">CUTT BARKOT NO :</label>
+                                    #{elektronikBEAN.el.cutt_barkot_no}<br/><br/>
+                                    <label  style="width: 150px;color: white;">FİRMA AD:</label>
+                                    #{elektronikBEAN.el.firma_adi}<br/><br/>
+                                    <label style="width: 150px;color: white;">UKD TARİHİ:</label>
+                                    #{elektronikBEAN.el.ukd_tarihi}<br/><br/>
+                                    <label  style="width: 150px;color: white;">EK ÖZELLİK-1:</label>
+                                    #{elektronikBEAN.el.ek1}<br/><br/>
+                                    <label  style="width: 150px;color: white;">EK ÖZELLİK-2:</label>
+                                    #{elektronikBEAN.el.ek2}<br/><br/>
+                                    <label  style="width: 150px;color: white;">ALIŞ TARİHİ:</label>
+                                    #{elektronikBEAN.el.s_al}  <br/><br/>
+                                    <label style="width: 150px;color: white;">DURUMU:</label>
+                                    #{elektronikBEAN.el.durumu}  <br/><br/><br/><br/><br/>
+
+
+                                </h:form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+
+

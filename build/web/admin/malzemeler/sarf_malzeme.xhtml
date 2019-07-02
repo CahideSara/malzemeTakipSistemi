@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/admin/malzemeler/malzemeler.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="alan">
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="col-md-12 ">
+                    <div class="img-rounded" style="background-color:#fff;height: 600px;">
+                        <br/>
+                        <br/>
+                        <div class="col-md-8">
+
+
+
+                            <h:form  id="sarf-table">
+                                <f:view>
+                                    <h:dataTable frame="border=3;" class="table table-striped table-bordered" style="background-color: #269abc;font-size: x-small;" cellspacing="0" width="100%"  value="#{sarfBEAN.smlist}" var="sarf">
+                                        <thead>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">MALZEME ID</a></f:facet>
+                                                <h:commandLink style="color: #b92c28" action="#{sarfBEAN.updateForm(sarf)}"  value="#{sarf.id}">
+                                                </h:commandLink>
+
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">MALZEME ADI</a></f:facet>
+                                                    #{sarf.malzeme_ad}  
+                                            </h:column> 
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">EBATI</a></f:facet>
+                                                    #{sarf.ebat}  
+                                            </h:column>                                           
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">FİRMA ADI</a></f:facet>
+                                                <h:column rendered="#{sarf.firma_ad==null}">
+                                                    <a>--- </a>
+                                                </h:column >
+
+                                                <h:column  rendered="#{sarf.firma_ad!=null}">
+                                                    #{sarf.firma_ad}
+                                                </h:column>
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">EK ÖZELLİKLER</a></f:facet>
+                                                <h:column rendered="#{sarf.ek_1==null}">
+                                                    <a>--- </a>
+                                                </h:column >
+
+                                                <h:column  rendered="#{sarf.ek_1!=null}">
+                                                    #{sarf.ek_1}
+                                                </h:column>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">ALIŞ TARİHİ</a></f:facet>
+                                                    #{sarf.s_al}  
+                                            </h:column> 
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">MALZEME KİMDE</a></f:facet>
+                                                <h:column rendered="#{sarf.sicil_no==0}">
+                                                    <a>--- </a>
+                                                </h:column >
+
+                                                <h:column  rendered="#{sarf.sicil_no!=0}">
+                                                    #{sarf.sicil_no}
+                                                </h:column>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">ZİMMETLENDİĞİ TARİH</a></f:facet>
+                                                <h:column rendered="#{sarf.sicil_no==0}">
+                                                    <a>--- </a>
+                                                </h:column >
+
+                                                <h:column  rendered="#{sarf.sicil_no!=0}">
+                                                    #{sarf.s_zimmet}
+                                                </h:column>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet  name="header"><a style="color:white">DURUMU</a></f:facet>
+                                                    #{sarf.durumu}  
+                                            </h:column>
+
+
+                                        </thead>
+                                    </h:dataTable>
+                                    <pre style="color: darkred">  #{sarfBEAN.page}.SAYFA  TOPLAM SAYFA: #{sarfBEAN.pageCount} </pre>
+                                </f:view>
+
+
+                            </h:form> 
+
+                            <h:form>
+
+                                <div class="btn btn-group">
+                                    <h:commandLink  action="#{sarfBEAN.geri()}"    >
+                                        <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                                        <f:ajax execute="@this" render="sarf-table"/>
+                                    </h:commandLink>
+                                    <h:commandLink  action="#{sarfBEAN.ileri()}"     >
+                                        <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                                        <f:ajax execute="@this" render="sarf-table"/>
+                                    </h:commandLink>
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-3 ">
+
+                            <div class="col-md-11 container "  style="font-size: x-small;background-color:#269abc;">
+                                <br/>
+                                <br/>
+
+                                <h:form  id="sarf_crud">
+                                    <div class="form-group">
+                                        <h:inputHidden value="#{sarfBEAN.sarfm.id}"> 
+                                        </h:inputHidden>  
+                                        <br/>
+                                        <label for="inputName"  style="width: auto;">MALZEME AD</label>
+                                        <h:inputText  value="#{sarfBEAN.sarfm.malzeme_ad}" styleClass="form-control"  >
+                                        </h:inputText>
+                                        <br/>
+                                        <label for="inputName"   style="width: auto">FİRMA AD</label>
+                                        <h:inputText  value="#{sarfBEAN.sarfm.firma_ad}" styleClass="form-control">
+                                        </h:inputText>
+                                        <br/>   
+                                        <label for="inputName"  style="width: auto">EBATI</label>   <br/>                                    
+                                        <h:selectOneMenu  value="#{sarfBEAN.sarfm.ebat}" class="form-group" style="height: 30px; width: 250px; ">
+                                            <f:selectItem  itemValue="KÜÇÜK" itemLabel="KÜÇÜK"/>
+                                            <f:selectItem  itemValue="ORTA" itemLabel="ORTA"/>
+                                            <f:selectItem  itemValue="BÜYÜK" itemLabel="BÜYÜK"/>
+                                        </h:selectOneMenu>
+                                        <br/>
+                                        <p:outputLabel  >ALINDIGI TARİH</p:outputLabel><br/>
+                                        <p:calendar    value="#{sarfBEAN.sarfm.al_tarihi}" locale="tr" />
+                                        <br/>
+                                        <label for="inputName"   style="width: auto">EK ÖZELLİKLER</label>
+                                        <h:inputText id="soyad" value="#{sarfBEAN.sarfm.ek_1}" styleClass="form-control">
+                                        </h:inputText>
+                                        <br/> 
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="btn-group">
+                                            <h:commandButton style="font-size: x-small" action="#{sarfBEAN.updateModal()}" value="KONTROL ET" styleClass="btn btn-success" rendered="#{sarfBEAN.sarfm.id!=null}">                                          
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small" action="#{sarfBEAN.create()}" value="EKLE" styleClass="btn btn-primary" rendered="#{sarfBEAN.sarfm.id==null}">                                          
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small"  onclick="$('#modalUpdate').modal('show')"   styleClass="btn btn-default" value="GÜNCELLE"  rendered="#{sarfBEAN.sarfm.id!=null}" >
+                                                <f:ajax execute="update-modal" render="sarf-crud sarf-table" />
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small" onclick="$('#modalDelete').modal('show')"    styleClass="btn btn-danger" value="SİL"  rendered="#{sarfBEAN.sarfm.id!=null}" >
+                                                <f:ajax execute="delete-modal" render="sarf-crud sarf-table"  />
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small"  action="#{sarfBEAN.clearForm()}"   styleClass="btn btn-info" value="FORMU TEMİZLE"  rendered="#{sarfBEAN.sarfm.id!=null}" >
+
+                                            </h:commandButton>
+                                            <h:commandButton style="font-size: x-small" onclick="$('#modalAriza').modal('show')"    styleClass="btn btn-danger" value="ARIZALI"  rendered="#{sarfBEAN.sarfm.id!=null}" >
+                                                <f:ajax execute="ariza-modal" render="sarf-crud sarf-table"  />
+                                            </h:commandButton>
+
+                                        </div>
+                                    </div>
+                                </h:form> 
+
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <h:form  >
+                    <div class="modal" id="modalUpdate" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <h:panelGroup layout="block" class="modal-content" id="update-modal">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">GÜNCELLEME </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div  class="modal-body">
+                                    <label style="color: darkred">MALZEME &#160; ID: &#160;&#160;&#160;&#160; </label>
+                                    #{sarfBEAN.sarfm.id}
+                                    <br/>
+                                    <label style="color: darkred">MALZEME &#160; AD: &#160;&#160;&#160; </label>
+                                    #{sarfBEAN.sarfm.malzeme_ad}
+                                    <br/>
+                                    <label style="color: darkred"> FİRMA &#160;ADI:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                    </label>
+                                    #{sarfBEAN.sarfm.firma_ad}
+                                    <br/>
+                                    <label style="color: darkred">EBADI:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</label>
+                                    #{sarfBEAN.sarfm.ebat}
+                                    <br/>
+                                    <label style="color: darkred">ALIŞ &#160;TARİHİ:&#160;&#160;&#160;&#160;&#160;&#160;&#160; </label>
+                                    #{sarfBEAN.sarfm.al_tarihi}
+                                    <br/>
+                                    <label style="color: darkred">
+                                        EK &#160;ÖZELLİKLER:</label>
+                                        #{sarfBEAN.sarfm.ek_1}
+                                    <br/>
+                                    <br/>
+                                    <label style="color: #ac2925">OLARAK BİLGİLER GÜNCELLENECEKTİR..</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton styleClass="btn btn-danger"   value="TAMAM" action="#{sarfBEAN.update()}" >                                                       
+                                    </h:commandButton> 
+                                    <button type="button"  class="btn bg-info" data-dismiss="modal">VAZGEÇ</button>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </h:form>
+
+
+                <h:form >
+                    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <h:panelGroup layout="block" class="modal-content" id="delete-modal">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">SİLME İŞLEMİ </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div  class="modal-body">
+                                    <label style="color: darkred">MALZEME &#160; ID: &#160;&#160;&#160;&#160; </label>
+                                    #{sarfBEAN.sarfm.id}
+                                    <br/>
+                                    <label style="color: darkred">MALZEME &#160; AD: &#160;&#160;&#160; </label>
+                                    #{sarfBEAN.sarfm.malzeme_ad}
+                                    <br/>
+                                    <label style="color: darkred"> FİRMA &#160;ADI:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                    </label>
+                                    #{sarfBEAN.sarfm.firma_ad}
+                                    <br/>
+                                    <label style="color: darkred">EBADI:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</label>
+                                    #{sarfBEAN.sarfm.ebat}
+                                    <br/>
+                                    <label style="color: darkred">ALIŞ &#160;TARİHİ:&#160;&#160;&#160;&#160;&#160;&#160;&#160; </label>
+                                    #{sarfBEAN.sarfm.al_tarihi}
+                                    <br/>
+                                    <label style="color: darkred">
+                                        EK &#160;ÖZELLİKLER:</label>
+                                        #{sarfBEAN.sarfm.ek_1}
+                                    <br/>
+                                    <br/>
+                                    <label style="color: #ac2925"> BİLGİLERİNDEKİ MALZEME SİLİNECEKTİR..</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton styleClass="btn btn-danger"   value="TAMAM" action="#{sarfBEAN.delete()}" >                                                       
+                                    </h:commandButton> 
+                                    <button type="button"  class="btn bg-info" data-dismiss="modal">VAZGEÇ</button>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </h:form>
+
+                <h:form >
+                    <div class="modal" id="modalAriza" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <h:panelGroup layout="block" class="modal-content" id="ariza-modal">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">ARIZA BİLDİSİNDE BULUN</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div  class="modal-body">
+
+
+
+                                    <label  >ARIZALANDIĞI  TARİH</label><br/>
+                                    <h:inputText  value="#{sarfBEAN.az.arizat}" styleClass="form-control"  >
+                                    </h:inputText>
+                                    <br/>
+                                    <label for="message-text" class="col-form-label">ARIZA NEDENİ</label><br/>
+                                    <h:inputTextarea    value="#{sarfBEAN.az.ariza_nedeni}" class="form-control" id="message-text"></h:inputTextarea>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton styleClass="btn btn-danger"   value="ARİZAYI BİLDİR" action="#{sarfBEAN.arizali()}" >                                                       
+                                    </h:commandButton> 
+                                    <button type="button"  class="btn bg-info" data-dismiss="modal">VAZGEÇ</button>
+
+                                </div>
+
+                            </h:panelGroup>
+                        </div>
+                    </div>
+
+                </h:form>
+
+
+
+
+
+
+            </div>
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+
+

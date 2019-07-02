@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/amir/malzemeler/malzemeler.xhtml"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:define name="alan">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 ">
+                    <div class="img-rounded" style="background-color:#fff;height: 600px;">
+                        <br/>
+                        <br/>
+
+
+                        <h:form id="elektronik-table" >
+                            <f:view>
+                                <h:dataTable frame="border=3;" class="table table-striped table-bordered" style="background-color: #269abc;font-size: xx-small;" cellspacing="0" width="100%"  value="#{elektronikBEAN.ellist}" var="el">
+                                    <thead>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color: white">ID</a></f:facet>
+                                                #{el.id}
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color: white">MALZEME ADI</a></f:facet>
+                                                #{el.malzeme_ad}  
+                                        </h:column> 
+
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color: white">ALIŞ TARİHİ</a></f:facet>
+                                                #{el.s_al}  
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color: white">KİMDE</a></f:facet>
+                                            <h:column rendered="#{el.sicil_no==0}">
+                                                <a>--- </a>
+                                            </h:column >
+
+                                            <h:column  rendered="#{el.sicil_no!=0}">
+                                                #{el.sicil_no}
+                                            </h:column>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color: white">ZİMMETLENDİĞİ TARİH</a></f:facet>
+                                            <h:column rendered="#{el.sicil_no==0}">
+                                                <a>--- </a>
+                                            </h:column >
+
+                                            <h:column  rendered="#{el.sicil_no!=0}">
+                                                #{el.s_zimmet}
+                                            </h:column>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet  name="header"><a style="color: white">DURUMU</a></f:facet>
+                                                #{el.durumu}  
+                                        </h:column>
+                                        <h:column >
+                                            <div class="btn-group">
+                                                <h:commandLink style="font-size: xx-small;background-color: #002752;" styleClass="btn btn-default" value="DETAYI" action="#{elektronikBEAN.detaya(el)}" >
+
+                                                </h:commandLink> 
+
+                                            </div>
+
+                                        </h:column >
+                                    </thead>
+                                </h:dataTable>
+                                <pre style="color: darkred">  #{elektronikBEAN.page}.SAYFA  TOPLAM SAYFA: #{elektronikBEAN.pageCount} </pre>
+                            </f:view>
+                        </h:form> 
+                        <h:form>
+
+                            <div class="btn btn-group">
+                                <h:commandLink  action="#{elektronikBEAN.geri()}"    >
+                                    <h:graphicImage url="/resources/images/geri.png" style="width:50px; height: 45px;" alt="cikis"  />
+                                    <f:ajax execute="@this" render="elektronik-table"/>
+                                </h:commandLink>
+                                <h:commandLink  action="#{elektronikBEAN.ileri()}"     >
+                                    <h:graphicImage url="/resources/images/next.png" style="width:50px; height: 45px;" alt="cikis"  />
+
+                                    <f:ajax execute="@this" render="elektronik-table"/>
+                                </h:commandLink>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
