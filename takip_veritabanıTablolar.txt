@@ -1,0 +1,62 @@
+create table kisiler(id serial ,sicil_no PRIMARY KEY int,ad VARCHAR(50),soyad VARCHAR(50),telefon VARCHAR(50),
+                    ekibi VARCHAR(50),mail VARCHAR(50),gorevi VARCHAR(50),konumu VARCHAR(50),tt_firma VARCHAR(50));
+
+
+create table public.user (sicil_no int,kullanici_adi VARCHAR(50) NOT NULL,sifre VARCHAR(50) NOT NULL,soru VARCHAR(100),cevap VARCHAR(100));
+ALTER TABLE public.user
+ADD CONSTRAINT user_sicil_no_fkey
+foreign key (sicil_no)
+REFERENCES kisiler(sicil_no)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+create table sarfmalzemeler(id serial , malzeme_ad VARCHAR(50),firma_adi VARCHAR(50),ebat VARCHAR(50),durumu VARCHAR(50),al_tarih date,zimmet_tarihi date,ek_özellikler VARCHAR(100),sicil_no int);
+ALTER TABLE sarfmalzemeler
+ADD CONSTRAINT sarfmalzemeler_sicil_no_fkey
+foreign key (sicil_no)
+REFERENCES kisiler(sicil_no)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+create table elektronik (id serial,malzeme_ad VARCHAR(50),xdsl_ttbarkot_no VARCHAR(100),im_no VARCHAR(200),seri_no VARCHAR(50),firma_adi VARCHAR(200),ek1 VARCHAR(100),
+                        ek2 VARCHAR(10),jdsu_gövde VARCHAR(200),jdsu_baslik VARCHAR (200),cutt_barkot_no VARCHAR(200),zimmet_tarihi date,sicil_no int,durumu VARCHAR(50),al_tarihi date,ukd_tarihi VARCHAR(50));
+ALTER TABLE elektronik
+ADD CONSTRAINT elektronik_sicil_no_fkey
+foreign key (sicil_no)
+REFERENCES kisiler(sicil_no)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+create table talepler(id serial PRIMARY KEY,malzeme_ad VARCHAR(50),kisi_sicil int,kisi_ad VARCHAR(50),kisi_soyad VARCHAR(50),talep_t date,durumu VARCHAR(50),tur VARCHAR(50),
+                     islem_t date,aciklama VARCHAR(200),islem_y VARCHAR(100),islem_aciklama VARCHAR(200));
+ ALTER TABLE talepler
+ADD CONSTRAINT talep
+foreign key (kisi_sicil)
+REFERENCES kisiler(sicil_no)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+create table arizalar(id serial PRIMARY KEY,sarf_id int,elektronik_id int,malzeme_ad VARCHAR(50),arizak VARCHAR(50),ariza_nedeni VARCHAR(200),arizat date,
+                     tur VARCHAR (50),durumu VARCHAR(50));
+  ALTER TABLE arizalar
+ADD CONSTRAINT arsarf
+foreign key (sarf_id)
+REFERENCES sarfmalzemeler(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE   
+ALTER TABLE arizalar 
+ADD CONSTRAINT  arer
+foreign key (elektronik_id)
+REFERENCES elektronik(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+create table turu(id serial PRIMARY KEY,ad VARCHAR(50));
+
+
+insert into kisiler(sicil_no,ad,soyad,telefon,ekibi,mail,gorevi,konumu,tt_firma)
+values (1,'BURCU','ULU','5077077777','SAHA','ulu@gmail.com','MÜHENDÝS','BAÞ YETKÝLÝ','FÝRMA');
+insert into public.user (sicil_no,kullanici_adi,sifre) values (1,'turktelekom','turktelekom');
+
+
+
